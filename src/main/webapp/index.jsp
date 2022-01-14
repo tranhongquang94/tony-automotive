@@ -27,14 +27,19 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="./index.css" type="text/css" />
+<script src="script.js" defer></script>
 </head>
 <body>
 
 	<jsp:include page="./header.jsp" />
-
+	
+	<video autoplay muted loop>
+		<source src="./video/video.mp4" type="video/mp4"/>
+	</video>
 	<main class="homepage-content">
 		<h1>Product List</h1>
 		<section class="cars-list">
+		
 		<c:forEach items="${cars }" var="car">
 			<div class="card-container">
 				<div class="img-container">

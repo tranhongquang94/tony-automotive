@@ -3,12 +3,12 @@
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	List<Navmenu> navmenu = new ArrayList<>();
-	navmenu.add(new Navmenu("Home","index.jsp"));
-	navmenu.add(new Navmenu("About Us","#"));
-	navmenu.add(new Navmenu("Contact","#"));
-	
-	pageContext.setAttribute("navmenu", navmenu);
+List<Navmenu> navmenu = new ArrayList<>();
+navmenu.add(new Navmenu("Home", "index.jsp"));
+navmenu.add(new Navmenu("About Us", "#"));
+navmenu.add(new Navmenu("Contact", "#"));
+
+pageContext.setAttribute("navmenu", navmenu);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,8 @@
 	<div class="bottom-toolbar">
 		<div class="row-container">
 			<div class="logo-container">
-				<img alt="logo" src="./logo/logo.png">
+				<a href="index.jsp"> <img alt="logo" src="./logo/logo.png">
+				</a>
 			</div>
 			<nav class="menu-container">
 				<c:forEach items="${navmenu }" var="item">

@@ -4,18 +4,16 @@ let logoutBtn = document.querySelector('.logout-btn');
 
 if (loginBtn) {
 	loginBtn.addEventListener('click', () => {
-		window.location.href = './login.jsp';
+		window.location.href = './LoginServlet?action=login';
 	});
 	registerBtn.addEventListener('click', () => {
-		window.location.href = './index.jsp'
+		window.location.href = './register.jsp'
 	});
 }
 
 if (logoutBtn) {
 	logoutBtn.addEventListener('click', () => {
-		fetch('handleLogout.jsp').then(res => {
-			window.location.href = './index.jsp';
-		})
+		window.location.href = './LoginServlet?action=logout';
 	});
 }
 

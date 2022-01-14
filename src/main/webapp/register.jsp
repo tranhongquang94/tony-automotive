@@ -16,13 +16,13 @@
   <body>
   
   <jsp:include page="./header.jsp" />
-  
+  <main class="login-and-register-page">
     <div class="modal-container">
-      <section class="img-container">
+      <section class="side-img-container">
         <img src="./images/leftCover.jpg" alt="coding-pic" class="left-cover" />
       </section>
       
-      <form class="form-container" action="formData.jsp">
+      <form class="form-container" action="#">
         <h2 class="mb-5">Hi, Welcome to <span class="title">Tony's Automotive</span>:</h2>
         <div class="mb-3">
           <label for="fullName" class="form-label">Full Name:</label>
@@ -76,7 +76,7 @@
       </form>
       
     </div>
-    
+    </main>
     <jsp:include page="footer.jsp" />
   </body>
   
