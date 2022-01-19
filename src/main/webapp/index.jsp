@@ -5,16 +5,16 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	List<Car> cars = new ArrayList<>();
-	cars.add(new Car("Nissan", "./images/products/nissan.jpg", 5000));
+	
+	/* cars.add(new Car("Nissan", "./images/products/nissan.jpg", 5000));
 	cars.add(new Car("Honda", "./images/products/honda.jpg", 7000));
 	cars.add(new Car("Toyota", "./images/products/toyota.jpg", 10000));
 	cars.add(new Car("Mazda", "./images/products/mazda.jpg", 8000));
 	cars.add(new Car("BMW", "./images/products/bmw.jpg", 12000));
 	cars.add(new Car("Ford", "./images/products/ford.jpg", 12000));
-	cars.add(new Car("Mitsubishi", "./images/products/mitsubishi.jpg", 12000));
+	cars.add(new Car("Mitsubishi", "./images/products/mitsubishi.jpg", 12000)); */
 	
-	pageContext.setAttribute("cars", cars);
+	/* pageContext.setAttribute("cars", cars); */
 %>
 <!DOCTYPE html>
 <html>

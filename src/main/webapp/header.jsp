@@ -16,12 +16,12 @@ pageContext.setAttribute("navmenu", navmenu);
 
 	<div class="toolbar">
 		<div class="button-container">
-			<c:if test="${sessionScope.username != null}">
+			<c:if test="${sessionScope.email != null}">
 				<span class="welcome-mes">Welcome back,
-					${sessionScope.username }</span>
+					${sessionScope.email }</span>
 				<button class="logout-btn btn">Sign Out</button>
 			</c:if>
-			<c:if test="${sessionScope.username == null}">
+			<c:if test="${sessionScope.email == null}">
 				<button class="login-btn btn">Sign In</button>
 				<button class="register-btn btn">Register</button>
 			</c:if>

@@ -1,7 +1,6 @@
-package servlet;
+package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.UsersDAO;
+import model.Users;
+
 /**
  * Servlet implementation class LoginServlet
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       UsersDAO usersDAO = new UsersDAO();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,9 +35,9 @@ public class LoginServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
-		String username = (String) session.getAttribute("username");
+		String email = (String) session.getAttribute("email");
 		
-		if (username == null || action == null) {
+		if (email == null || action == null) {
 			response.sendRedirect("login.jsp");
 		} else {
 			switch (action) {
@@ -43,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("index.jsp");
 				break;
 			case "logout":
-				logout(request,response);
+				logout(request,response); 
 				break;
 			default:
 				response.sendRedirect("index.jsp");
@@ -56,29 +58,35 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String action = request.getParameter("action");
 		
 		if (action.equals("login")) {
-			login(request, response, username, password);
+			login(request, response, email, password);
 		}
 	}
 	
-	private void login(HttpServletRequest request, HttpServletResponse response, String username, String password) throws ServletException, IOException {
+	private void login(HttpServletRequest request, HttpServletResponse response, String email, String password) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		if (username.equals("admin") && password.equals("admin")) {
-			session.setAttribute("username", username);
-			response.sendRedirect("index.jsp");
-		} else {
-			response.sendRedirect("login.jsp");
+		try {
+			Users users = usersDAO.getUsersByEmailAndPassword(email, password);
+			if (users != null) {
+				session.setAttribute("email", email);
+				response.sendRedirect("index.jsp");
+			} else {
+				response.sendRedirect("login.jsp");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	};
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.removeAttribute("username");
+		session.removeAttribute("email");
 		response.sendRedirect("index.jsp");
 	}
 
