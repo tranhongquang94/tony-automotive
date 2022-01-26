@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 List<Navmenu> navmenu = new ArrayList<>();
-navmenu.add(new Navmenu("Home", "index.jsp"));
+navmenu.add(new Navmenu("Home", "CarsListServlet"));
 navmenu.add(new Navmenu("About Us", "#"));
 navmenu.add(new Navmenu("Contact", "#"));
 
@@ -19,6 +19,7 @@ pageContext.setAttribute("navmenu", navmenu);
 			<c:if test="${sessionScope.email != null}">
 				<span class="welcome-mes">Welcome back,
 					${sessionScope.email }</span>
+				<span class="cart-mes">Cart(${sessionScope.cart.cars.size()})</span>
 				<button class="logout-btn btn">Sign Out</button>
 			</c:if>
 			<c:if test="${sessionScope.email == null}">
@@ -31,7 +32,7 @@ pageContext.setAttribute("navmenu", navmenu);
 	<div class="bottom-toolbar">
 		<div class="row-container">
 			<div class="logo-container">
-				<a href="index.jsp"> <img alt="logo" src="./logo/logo.png">
+				<a href="CarsListServlet"> <img alt="logo" src="./logo/logo.png">
 				</a>
 			</div>
 			<nav class="menu-container">

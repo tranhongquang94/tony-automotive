@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.UsersDAO;
+import model.CartDTO;
 import model.Users;
 
 /**
@@ -42,13 +45,13 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			switch (action) {
 			case "login": 
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("CarsListServlet");
 				break;
 			case "logout":
 				logout(request,response); 
 				break;
 			default:
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("CarsListServlet");
 			}
 		}
 	}
@@ -74,7 +77,9 @@ public class LoginServlet extends HttpServlet {
 			Users users = usersDAO.getUsersByEmailAndPassword(email, password);
 			if (users != null) {
 				session.setAttribute("email", email);
-				response.sendRedirect("index.jsp");
+				session.setAttribute("cart", new CartDTO(new HashSet<>()));
+				
+				response.sendRedirect("CarsListServlet");
 			} else {
 				response.sendRedirect("login.jsp");
 			}
@@ -87,7 +92,7 @@ public class LoginServlet extends HttpServlet {
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("email");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("CarsListServlet");
 	}
 
 }

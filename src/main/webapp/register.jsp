@@ -14,7 +14,7 @@
 
 <body>
 
-	<jsp:include page="./header.jsp" />
+	<jsp:include page="./components/header.jsp" />
 	<main class="login-and-register-page">
 		<div class="modal-container">
 			<section class="side-img-container">
@@ -60,7 +60,7 @@
 
 		</div>
 	</main>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="./components/footer.jsp" />
 </body>
 
 </html>

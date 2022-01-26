@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 			if (result == 1) {
 				response.sendRedirect("login.jsp");
 			} else {
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("CarsListServlet");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

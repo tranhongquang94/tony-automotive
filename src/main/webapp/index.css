@@ -3,10 +3,16 @@
 	--font-size: 1.25rem;
 	--main-color: #8C1818;	
 	--main-color-hover: #B74239;
+	
 }
 
 main {
-	background: url(./images/background.jpg);
+	background: #e9e7ea;
+}
+
+a {
+	text-decoration: none;
+	color: unset;	
 }
 
 .login-and-register-page {
@@ -54,7 +60,7 @@ header > * {
 	background-color: transparent;
 }
 
-.welcome-mes {
+.welcome-mes, .cart-mes {
 	color: white;	
 }
 
@@ -144,6 +150,18 @@ video {
 	height: 600px;
 }
 
+.site-block {
+	margin-bottom: 2rem;
+}
+
+.category-list {
+	display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin-bottom: 2rem;
+    font-size: var(--font-size);
+}
+
 .cars-list {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -210,4 +228,23 @@ p {
 
 .order-btn:hover {
     background-color: var(--main-color-hover);
+}
+
+/* Page list*/
+.pages-container {
+	display: inline-flex;
+    justify-content: flex-end;
+    width: 70%;
+}
+
+.pages-container > a {
+	cursor: pointer;
+	margin-left: 5rem;
+	font-size: 1.25rem;
+}
+
+/* Car Detail Page */
+
+.car-container {
+	
 }

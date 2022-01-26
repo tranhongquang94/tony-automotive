@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<jsp:include page="./header.jsp" />
+	<jsp:include page="./components/header.jsp" />
 	<main class="login-and-register-page">
 		<div class="modal-container modal-login">
 			<section class="side-img-container">

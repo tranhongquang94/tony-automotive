@@ -45,7 +45,41 @@ public class UsersDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-			close(conn, ps, rs);
+			DBUtil.close(conn, ps, rs);
+		}
+		return null;
+	}
+	
+	public Users getUsersByEmail (String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps= null;
+		ResultSet rs = null;
+		Users users = null;
+		
+		try {
+			conn = DBUtil.makeConnection();
+			String sql = "SELECT * FROM users WHERE email = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String fullName = rs.getString("full_name");
+				String password = rs.getString("password");
+				String birthDate = rs.getString("birth_date");
+				String gender = rs.getString("gender");
+				
+				users = new Users(id, fullName, email, password, birthDate, gender);
+			} else {
+				return null;
+			}
+			return users;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(conn, ps, rs);
 		}
 		return null;
 	}
@@ -81,25 +115,8 @@ public class UsersDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-			close(conn, ps, rs);
+			DBUtil.close(conn, ps, rs);
 		}
 		return 0;
-	}
-	
-	protected static void close(Connection conn, Statement ps, ResultSet rs) {
-		try {
-			if(rs != null) {
-				rs.close();
-			}
-			if (ps != null) {
-				ps.close();
-			}
-			if (conn != null ) {
-				conn.close();
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
 	}
 }

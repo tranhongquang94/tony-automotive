@@ -4,18 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	
-	/* cars.add(new Car("Nissan", "./images/products/nissan.jpg", 5000));
-	cars.add(new Car("Honda", "./images/products/honda.jpg", 7000));
-	cars.add(new Car("Toyota", "./images/products/toyota.jpg", 10000));
-	cars.add(new Car("Mazda", "./images/products/mazda.jpg", 8000));
-	cars.add(new Car("BMW", "./images/products/bmw.jpg", 12000));
-	cars.add(new Car("Ford", "./images/products/ford.jpg", 12000));
-	cars.add(new Car("Mitsubishi", "./images/products/mitsubishi.jpg", 12000)); */
-	
-	/* pageContext.setAttribute("cars", cars); */
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,31 +20,44 @@
 </head>
 <body>
 
-	<jsp:include page="./header.jsp" />
-	
+	<jsp:include page="./components/header.jsp" />
+
 	<video autoplay muted loop>
-		<source src="./video/video.mp4" type="video/mp4"/>
+		<source src="./video/video.mp4" type="video/mp4" />
 	</video>
 	<main class="homepage-content">
-		<h1>Product List</h1>
-		<section class="cars-list">
-		
-		<c:forEach items="${cars }" var="car">
-			<div class="card-container">
-				<div class="img-container">
-					<img src="${car.imageURL }" alt="car-image">
-				</div>
-				<div class="description">
-					<div class="text-container">
-						<p class="product-name">${car.name }</p>
-						<p class="product-price">$ ${car.price}</p>
+		<jsp:include page="./components/bestSeller.jsp" />
+
+		<div class="featured-cars site-block">
+			<h1>Featured Cars</h1>
+			<jsp:include page="./components/category.jsp" />
+
+			<section class="cars-list">
+				<c:forEach items="${cars }" var="car">
+					<div class="card-container">
+						<a href="CarsListServlet?carId=${car.id }">
+							<div class="img-container">
+								<img src="${car.imageURL }" alt="car-image">
+							</div>
+							<div class="description">
+								<div class="text-container">
+									<p class="product-name">${car.name }</p>
+									<p class="product-price">$ ${car.price}</p>
+								</div>
+								<button class="order-btn">Order Now</button>
+							</div>
+						</a>
 					</div>
-					<button class="order-btn">Order Now</button>
-				</div>
-			</div>
-		</c:forEach>
-			
-		</section>
+				</c:forEach>
+			</section>
+
+			<section class="pages-container">
+				<c:forEach items="${pageArray}" var="page">
+					<a href="CarsListServlet?page=${page}">${page }</a>
+				</c:forEach>
+			</section>
+		</div>
+		<br>
 	</main>
 </body>
 </html>
