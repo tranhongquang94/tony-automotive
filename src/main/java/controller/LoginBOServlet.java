@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.UsersDAO;
-import model.Car;
 import model.CartDTO;
 import model.Users;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LoginBOServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/LoginBOServlet")
+public class LoginBOServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       UsersDAO usersDAO = new UsersDAO();
+    UsersDAO usersDAO = new UsersDAO(); 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LoginBOServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,27 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String action = request.getParameter("action");
-		HttpSession session = request.getSession();
-		
-		String email = (String) session.getAttribute("email");
-		
-		if (email == null || action == null) {
-			response.sendRedirect("login.jsp");
-		} else {
-			switch (action) {
-			// User type ?action=login to URL without login
-			case "login": 
-				response.sendRedirect("CarsListServlet");
-				break;
-			// User type ?action=logout to URL without login
-			case "logout":
-				logout(request,response); 
-				break;
-			default:
-				response.sendRedirect("CarsListServlet");
-			}
-		}
+		response.sendRedirect("bo/admin/loginBO.jsp");
 	}
 
 	/**
@@ -63,12 +42,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getParameter("action");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String action = request.getParameter("action");
 		
-		if (action.equals("login")) {
+		switch(action) {
+		case "login":
 			login(request, response, email, password);
+			break;
+		case "logout":
+			logout(request, response);
+			break;
+		default:
+			response.sendRedirect("bo/admin/loginBO.jsp");
+			break;
 		}
 	}
 	
@@ -78,9 +65,8 @@ public class LoginServlet extends HttpServlet {
 			Users users = usersDAO.getUsersByEmailAndPassword(email, password);
 			if (users != null) {
 				session.setAttribute("email", email);
-				session.setAttribute("cart", new CartDTO(new HashMap<Car, Integer>()));
-				
-				response.sendRedirect("CarsListServlet");
+				session.setAttribute("role", "admin");
+				response.sendRedirect("CarsListBOServlet");
 			} else {
 				response.sendRedirect("login.jsp");
 			}
@@ -93,7 +79,8 @@ public class LoginServlet extends HttpServlet {
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("email");
-		response.sendRedirect("CarsListServlet");
+		session.removeAttribute("role");
+		response.sendRedirect("LoginBOServlet");
 	}
 
 }

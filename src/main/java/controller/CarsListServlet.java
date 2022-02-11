@@ -51,6 +51,7 @@ public class CarsListServlet extends HttpServlet {
 			List<Car> mostOrderedCars = carsDAO.getMostOrderedCars();
 			List<Category> categories = categoriesDAO.getCategories();
 			
+			// Display list of cars, category and pages
 			if (categoryId == null && page == null) {
 				cars = carsDAO.getListOfCars();
 			} else if (categoryId != null && page == null) {
@@ -59,6 +60,7 @@ public class CarsListServlet extends HttpServlet {
 				cars = carsDAO.getCarByPages(Integer.parseInt(page));
 			}
 			
+			// Display single car
 			if (carId != null) {
 				 Car car = carsDAO.getCarById(Integer.parseInt(carId));
 				 displayCarById(request, response, car);

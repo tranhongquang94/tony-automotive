@@ -29,5 +29,11 @@ public class Order_details {
 		this.carId = carId;
 		this.quantity = quantity;
 	}
+	public Order_details() {
+		super();
+	}
+	public Order_details(int carId) {
+		// TODO Auto-generated constructor stub
+	}
 	
 }

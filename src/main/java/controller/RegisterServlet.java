@@ -42,11 +42,11 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String birthDate = request.getParameter("birthdate");
 		String gender = request.getParameter("gender");
-		
+		String role = "N";
 		//Need validation or sanitization here
 		
 		try {
-			int result = usersDAO.insertUsers(fullName, email, password, birthDate, gender);
+			int result = usersDAO.insertUsers(fullName, email, password, birthDate, gender, role);
 			if (result == 1) {
 				response.sendRedirect("login.jsp");
 			} else {

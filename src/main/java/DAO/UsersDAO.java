@@ -35,8 +35,9 @@ public class UsersDAO {
 				String fullName = rs.getString("full_name");
 				String birthDate = rs.getString("birth_date");
 				String gender = rs.getString("gender");
+				String role = rs.getString("role");
 				
-				users = new Users(id, fullName, email, password, birthDate, gender);
+				users = new Users(id, fullName, email, password, birthDate, gender, role);
 			} else {
 				return null;
 			}
@@ -69,8 +70,9 @@ public class UsersDAO {
 				String password = rs.getString("password");
 				String birthDate = rs.getString("birth_date");
 				String gender = rs.getString("gender");
+				String role = rs.getString("role");
 				
-				users = new Users(id, fullName, email, password, birthDate, gender);
+				users = new Users(id, fullName, email, password, birthDate, gender, role);
 			} else {
 				return null;
 			}
@@ -84,7 +86,7 @@ public class UsersDAO {
 		return null;
 	}
 	
-	public int insertUsers (String fullName, String email, String password, String birthDate, String gender) {
+	public int insertUsers (String fullName, String email, String password, String birthDate, String gender, String role) {
 		Connection conn = null;
 		PreparedStatement ps= null;
 		ResultSet rs = null;
@@ -92,7 +94,7 @@ public class UsersDAO {
 		
 		try {
 			conn = DBUtil.makeConnection();
-			String sqlInsert = "INSERT INTO users (full_name, email, password, birth_date, gender) VALUES(?, ?, ? ,?, ?)";
+			String sqlInsert = "INSERT INTO users (full_name, email, password, birth_date, gender, role) VALUES(?, ?, ? ,?, ?, ?)";
 			//Add generated keys to prepare statement to retrieve inserted id
 			ps= conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, fullName);
@@ -100,13 +102,14 @@ public class UsersDAO {
 			ps.setString(3, password);
 			ps.setString(4, birthDate);
 			ps.setString(5, gender);
+			ps.setString(6, role);
 			
 			ps.execute();
 			//Retrieve any auto generated keys 
 			rs = ps.getGeneratedKeys();
 			if (rs.next()) {
 				int newId = rs.getInt(1);
-				users = new Users(newId, fullName, email, password, birthDate, gender);
+				users = new Users(newId, fullName, email, password, birthDate, gender, role);
 				return 1;
 			} else {
 				return 0;				

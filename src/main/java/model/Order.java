@@ -30,4 +30,8 @@ public class Order {
 		this.userId = userId;
 		this.orderTime = orderTime;
 	}
+	public Order() {
+		super();
+	}
+	
 }

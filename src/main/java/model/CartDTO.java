@@ -1,24 +1,22 @@
 package model;
 
-import java.util.Set;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
 
 public class CartDTO {
-	private Set<Car> cars = new HashSet<Car>();
+	private HashMap<Car, Integer> cars = new HashMap<Car, Integer>();
 
-	public Set<Car> getCars() {
+	public HashMap<Car, Integer> getCars() {
 		return cars;
 	}
 
-	public void setCars(Set<Car> cars) {
+	public void setCars(HashMap<Car, Integer> cars) {
 		this.cars = cars;
 	}
 
-	public CartDTO(Set<Car> cars) {
+	public CartDTO(HashMap<Car, Integer> cars) {
 		super();
 		this.cars = cars;
 	}
-
-
 }

@@ -36,7 +36,7 @@
 				<p>
 					<span>Year: </span>${car.year }</p>
 				<c:if test="${sessionScope.email != null }">
-					<a href="CartServlet?carId=${car.id }">Order now</a>
+					<a href="CartServlet?action=add&carId=${car.id }">Order now</a>
 				</c:if>
 			</div>
 		</div>
